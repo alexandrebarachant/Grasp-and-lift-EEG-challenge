@@ -1,0 +1,51 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - SlidingWindow
+        - DelayPreds
+    preprocessing.covs_alex:
+        - DistanceCalculatorRafal
+    pyriemann.utils.covariance:
+        - _lwf
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+        - PolynomialFeatures
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'CovsRafal_35Hz_256pts'
+  cores: 6
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: True
+
+# preprocessing functions receive arguments: X, y(only for train), subject (subject's number)
+Preprocessing:
+  - FilterBank:
+      filters: [[35]]
+  - SlidingWindow:
+      window: 256
+      subsample: subsample
+      estimator: _lwf
+  - DistanceCalculatorRafal:
+      metric_mean: "'logeuclid'"
+      metric_dist: "['riemann']"
+      subsample: subsample
+      n_jobs: 12
+
+PostPreprocessing:
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 20 / subsample
+
+Models:
+  #- '("lda",LDA())'
+  - '("lr",LogisticRegression())'
+  #- '("sc",StandardScaler()),("lr",LogisticRegression())'

@@ -1,0 +1,39 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - SubSample
+        - DelayPreds
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'FBL_delay100_skip20'
+  cores: 3
+  subsample: 10
+  cachePreprocessed: False
+
+# preprocessing functions receive arguments: X, y(only for train)
+Preprocessing:
+  - FilterBank:
+      filters: "'LowpassBank'"
+  - SubSample:
+      subsample: subsample
+
+PostPreprocessing:
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 200 / subsample
+
+Models:
+  - '("l1",Normalizer(norm="l1")),("lr",LogisticRegression())'
+  - '("l2",Normalizer(norm="l2")),("lr",LogisticRegression())'
+  - '("sc",StandardScaler()),("lr",LogisticRegression())'
+  - '("lda",LDA())'

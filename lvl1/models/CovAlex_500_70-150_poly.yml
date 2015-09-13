@@ -1,0 +1,36 @@
+# Import python package
+imports:
+    preprocessing.aux:
+        - DelayPreds
+        - SubSample
+        - NoneTransformer
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - PolynomialFeatures
+
+# Meta variables
+Meta:
+  file: 'CovsAlex_70-150Hz_500pts_poly'
+  cores: 6
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: False
+  addPreprocessed:
+      - 'CovsAlex_70-150Hz_500pts'
+
+# preprocessing functions receive arguments: X, y(only for train)
+Preprocessing:
+    - NoneTransformer:
+
+PostPreprocessing:
+    - SubSample:
+        subsample: 1
+    - PolynomialFeatures:
+       degree: 2
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 50 / subsample
+
+Models:
+  - '("lr",LogisticRegression())'

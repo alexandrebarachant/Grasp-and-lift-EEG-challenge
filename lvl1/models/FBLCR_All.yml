@@ -1,0 +1,43 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - SubSample
+        - DelayPreds
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'FBLCR_All'
+  cores: 6
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: False
+  addPreprocessed:
+      - 'CovsRafal_35Hz_256pts'
+      - 'CovsRafal_35Hz_500pts'
+      - 'CovsAlex_35Hz_250pts'
+      - 'CovsAlex_35Hz_500pts'
+      - 'CovsAlex_1-15Hz_500pts'
+      - 'CovsAlex_7-30Hz_500pts'
+      - 'CovsAlex_20-35Hz_500pts'
+      - 'CovsAlex_70-150Hz_500pts'
+      - 'CovsERP_Dist'
+
+# preprocessing functions receive arguments: X, y(only for train)
+Preprocessing:
+  - FilterBank:
+      filters: "'LowpassBank'"
+  - SubSample:
+      subsample: subsample
+
+Models:
+  - '("sc",StandardScaler()),("lr",LogisticRegression())'
+  - '("sc",StandardScaler()),("lda",LDA())'

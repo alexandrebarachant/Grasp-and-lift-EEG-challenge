@@ -1,0 +1,8 @@
+Meta:
+  file: 'cnn_script_1D_7-30Hz'
+
+filters: [[7,30]]
+bags: 10
+
+delay: 4000
+skip: 8

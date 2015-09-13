@@ -1,0 +1,41 @@
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    sklearn.preprocessing:
+        - StandardScaler
+
+Meta:
+  file: 'RNN_FB_delay4000'
+  cachePreprocessed: False
+
+Preprocessing:
+  - FilterBank:
+      filters: [[1],[5],[10],[30]]
+  - StandardScaler:
+
+Training:
+  lr: 0.1
+  decay: 1e-6
+  momentum: 0.9
+  delay: 4000
+  skip: 100
+  parts_train: 2
+  parts_test: 1
+  smallEpochs: 2
+  majorEpochs: 50
+  checkEveryEpochs: 2
+  subsample: 10
+
+Architecture:
+  - 'Dropout':
+        p: 0.5
+  - 'GRU':
+        num_units: 256
+        next_GRU: False
+  - 'Dense':
+        num_units: 256
+  - 'Activation':
+        type: 'relu'
+  - 'Dropout':
+        p: 0.7
+  - 'Output':

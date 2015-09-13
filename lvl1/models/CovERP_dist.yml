@@ -1,0 +1,43 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - DelayPreds
+    preprocessing.erp:
+        - ERPDistance
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'CovsERP_Dist'
+  cores: 1
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: True
+
+# preprocessing functions receive arguments: X, y(only for train), subject (subject's number)
+Preprocessing:
+  - FilterBank:
+      filters: [[1, 20]]
+  - ERPDistance:
+      window: 500
+      subsample: subsample
+      nfilters: 3
+      metric: "'riemann'"
+      n_jobs: 7
+
+PostPreprocessing:
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 20 / subsample
+
+Models:
+  - '("lda",LDA())'
+  - '("lr",LogisticRegression())'

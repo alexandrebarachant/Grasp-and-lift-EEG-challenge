@@ -1,0 +1,9 @@
+Meta:
+  file: 'cnn_script_2D_30Hz'
+
+filt2Dsize: 16
+filters: [[30]]
+bags: 10
+
+delay: 4000
+skip: 8

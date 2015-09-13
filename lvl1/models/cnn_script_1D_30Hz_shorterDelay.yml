@@ -1,0 +1,8 @@
+Meta:
+  file: 'cnn_script_1D_30Hz_shorterDelay'
+
+filters: [[30]]
+bags: 10
+
+delay: 2000
+skip: 4

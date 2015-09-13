@@ -1,0 +1,50 @@
+
+Meta:
+  file: 'xgb_subjects_sub'
+
+addSubjectID:
+
+Model:
+  XGB:
+    ensemble: [
+                'FBL_L1', 'FBL_L2', 'FBL_Sc', 'FBL_LDA', 'FBL_LDA_L1', 
+                'FBLCA_L1', 'FBLCA_L2', 'FBLCA_Sc', 'FBLCA_LDA', 'FBLCA_LDA_L1',
+                'FBLCR_L1', 'FBLCR_L2', 'FBLCR_Sc', 'FBLCR_LDA', 'FBLCR_LDA_L1',
+                'FBL_delay_L1', 'FBL_delay_L2', 'FBL_delay_Sc', 'FBL_delay_LDA',
+                'FBLCAll_Sc', 'FBLCAll_LDA_Sc',
+                
+                'C500_[1_15]_LR',
+                'C500_[7_30]_LR', 
+                'C500_[20_35]_LR', 
+                'C500_[70_150]_LR', 
+                'C250_[35]_LR',
+                'C500_[35]_LR', 
+                'ERPDist', 
+                'CAll_LR',
+                
+                'C500_[1_15]_poly_LR',
+                'C500_[7_30]_poly_LR',
+                'C500_[20_35]_poly_LR',
+                'C500_[70_150]_poly_LR',
+                'C250_[35]_poly_LR',
+                'C500_[35]_poly_LR',
+                'ERPDist_poly',
+                
+                'CovsRafal_35Hz_256', 'CovsRafal_35Hz_500',
+                
+                'CNN_1D_FB30',
+                'CNN_2D_FB30', 
+                'CNN_1D_FB7-30',
+                'CNN_1D_FB5',
+                
+                'RNN_FB_delay4000',
+                ]
+    n_estimators: 150
+    max_depth: 5
+    subsample: 0.7
+        
+    delay: 1000
+    skip: 150
+    
+    subsample_data: 50
+    partsTest: 4

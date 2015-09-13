@@ -1,0 +1,75 @@
+
+Meta:
+  file: 'NN_256_allModels_ADAM_bags'
+  nbags: 50
+  bagsize: 8
+
+
+Model:
+  NeuralNet:
+    ensemble: [
+                'FBL_L1', 'FBL_L2', 'FBL_Sc', 'FBL_LDA', 'FBL_LDA_L1', 
+                'FBLCA_L1', 'FBLCA_L2', 'FBLCA_Sc', 'FBLCA_LDA', 'FBLCA_LDA_L1',
+                'FBLCR_L1', 'FBLCR_L2', 'FBLCR_Sc', 'FBLCR_LDA', 'FBLCR_LDA_L1',
+                'FBLCAll_Sc','FBLCAll_LDA_Sc',
+                'FBL_delay_L1', 'FBL_delay_L2', 'FBL_delay_Sc', 'FBL_delay_LDA',
+                
+                'C500_[1_15]_LR', 'C500_[1_15]_LDA', 
+                'C500_[7_30]_LR', 'C500_[7_30]_LDA',
+                'C500_[20_35]_LR', 'C500_[20_35]_LDA',
+                'C500_[70_150]_LR', 'C500_[70_150]_LDA',
+                'C250_[35]_LR', 'C250_[35]_LDA',
+                'C500_[35]_LR', 'C500_[35]_LDA',
+                'ERPDist', 'ERPDist_LDA',
+                'CAll_LR',
+                
+                'CovsRafal_35Hz_256','CovsRafal_35Hz_500',
+                
+                'C500_[1_15]_poly_LR',
+                'C500_[7_30]_poly_LR',
+                'C500_[20_35]_poly_LR',
+                'C500_[70_150]_poly_LR',
+                'C250_[35]_poly_LR',
+                'C500_[35]_poly_LR',
+                'ERPDist_poly',
+                
+                'CNN_1D_FB30',
+                'CNN_2D_FB30', 
+                'CNN_1D_FB7-30',
+                'CNN_1D_FB5',
+                
+                'CNN_2D_FB30_shorterDelay',
+                'CNN_1D_FB30_shorterDelay',
+                
+                'RNN_FB_delay4000',
+                ]
+    training_params:
+      optim: 'adam'
+      lr: 0.01
+    
+    delay: 1500
+    skip: 100
+    partsTrain: 6
+    partsTest: 6
+    smallEpochs: 1
+    majorEpochs: 1
+    checkEveryEpochs: 1
+    
+    verbose: False
+
+    architecture:
+      - 'Dropout':
+            p: 0.5
+      - 'Dense':
+            num_units: 256
+      - 'Activation':
+            type: 'relu'
+      - 'Dropout':
+            p: 0.7
+      - 'Dense':
+            num_units: 256
+      - 'Activation':
+            type: 'relu'
+      - 'Dropout':
+            p: 0.7
+      - 'Output':

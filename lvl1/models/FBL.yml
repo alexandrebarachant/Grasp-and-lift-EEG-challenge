@@ -1,0 +1,35 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - SubSample
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'FBL'
+  cores: 6
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: False
+
+# preprocessing functions receive arguments: X, y(only for train)
+Preprocessing:
+  - FilterBank:
+      filters: "'LowpassBank'"
+  - SubSample:
+      subsample: subsample
+
+Models:
+  - '("l1",Normalizer(norm="l1")),("lr",LogisticRegression())'
+  - '("l2",Normalizer(norm="l2")),("lr",LogisticRegression())'
+  - '("sc",StandardScaler()),("lr",LogisticRegression())'
+  - '("lda",LDA())'
+  - '("l1",Normalizer(norm="l1")),("lda",LDA())'

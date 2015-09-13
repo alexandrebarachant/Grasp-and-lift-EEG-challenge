@@ -1,0 +1,48 @@
+# Import python package
+imports:
+    preprocessing.filterBank:
+        - FilterBank
+    preprocessing.aux:
+        - SlidingWindow
+        - DelayPreds
+    preprocessing.covs_alex:
+        - DistanceCalculatorAlex
+    pyriemann.utils.covariance:
+        - _lwf
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+
+# Meta variables
+Meta:
+  file: 'CovsAlex_70-150Hz_500pts'
+  cores: 6
+  subsample: 10
+  cachePreprocessed: True
+
+# preprocessing functions receive arguments: X, y(only for train), subject (subject's number)
+Preprocessing:
+  - FilterBank:
+      filters: [[70, 150]]
+  - SlidingWindow:
+      window: 500
+      subsample: subsample
+      estimator: _lwf
+  - DistanceCalculatorAlex:
+      metric_mean: "'logeuclid'"
+      metric_dist: "['riemann']"
+      subsample: subsample
+      n_jobs: 7
+
+PostPreprocessing:
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 20 / subsample
+
+Models:
+  - '("lda",LDA())'
+  - '("lr",LogisticRegression())'

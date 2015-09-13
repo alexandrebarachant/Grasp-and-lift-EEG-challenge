@@ -1,0 +1,39 @@
+
+Meta:
+  file: 'xgb_onlyCovs'
+
+addSubjectID:
+
+Model:
+  XGB:
+    ensemble: [
+
+                'C500_[1_15]_LR', 'C500_[1_15]_LDA',
+                'C500_[7_30]_LR', 'C500_[7_30]_LDA',
+                'C500_[20_35]_LR','C500_[20_35]_LDA',
+                'C500_[70_150]_LR', 'C500_[70_150]_LDA',
+                'C250_[35]_LR', 'C250_[35]_LDA',
+                'C500_[35]_LR', 'C500_[35]_LDA',
+                'ERPDist', 'ERPDist_LDA',
+                'CAll_LR',
+
+                'C500_[1_15]_poly_LR',
+                'C500_[7_30]_poly_LR',
+                'C500_[20_35]_poly_LR',
+                'C500_[70_150]_poly_LR',
+                'C250_[35]_poly_LR',
+                'C500_[35]_poly_LR',
+                'ERPDist_poly',
+
+                'CovsRafal_35Hz_256', 'CovsRafal_35Hz_500',
+                
+                ]
+    n_estimators: 150
+    max_depth: 5
+    subsample: 0.7
+
+    delay: 1000
+    skip: 150
+
+    subsample_data: 50
+    partsTest: 2

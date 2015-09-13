@@ -1,0 +1,51 @@
+
+Meta:
+  file: 'RNN_256_delay4000_FBLCRAll_ADAM'
+
+
+Model:
+  NeuralNet:
+    ensemble: [
+                'FBL_L1', 'FBL_L2', 'FBL_Sc', 'FBL_LDA', 'FBL_LDA_L1', 
+                'FBLCAll_Sc','FBLCAll_LDA_Sc',
+                'FBL_delay_L1', 'FBL_delay_L2', 'FBL_delay_Sc', 'FBL_delay_LDA',
+                
+                'C500_[1_15]_LR', 'C500_[1_15]_LDA', 
+                'C500_[7_30]_LR', 'C500_[7_30]_LDA',
+                'C500_[20_35]_LR', 'C500_[20_35]_LDA',
+                'C500_[70_150]_LR', 'C500_[70_150]_LDA',
+                'C250_[35]_LR', 'C250_[35]_LDA',
+                'C500_[35]_LR', 'C500_[35]_LDA',
+                'ERPDist', 'ERPDist_LDA',
+                'CAll_LR',
+                
+                'CNN_1D_FB30',
+                'CNN_2D_FB30', 
+                'CNN_1D_FB7-30',
+                'CNN_1D_FB5',
+                ]
+    training_params:
+      optim: 'adam'
+      lr: 0.01
+    
+    delay: 4000
+    skip: 100
+    partsTrain: 4
+    partsTest: 4
+    smallEpochs: 1
+    majorEpochs: 1
+    checkEveryEpochs: 1
+
+    architecture:
+      - 'Dropout':
+            p: 0.5
+      - 'GRU':
+            num_units: 256
+            next_GRU: False
+      - 'Dense':
+            num_units: 256
+      - 'Activation':
+            type: 'relu'
+      - 'Dropout':
+            p: 0.7
+      - 'Output':

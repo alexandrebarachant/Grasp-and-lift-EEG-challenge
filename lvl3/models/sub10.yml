@@ -1,0 +1,41 @@
+
+
+fileName: 'sub10'
+subsample: 100
+seed: 45667
+mean_type: ['arithmetic','geometric','power']
+verbose: False
+
+#score on series 7: 0.97868
+#score on series 8: 0.97845
+#CV score: 0.97857 / 0.000116
+
+ensemble: [
+          'xgb_bags_model', 
+          'xgb_short', 
+          'xgb_longshort', 
+          'xgb_longshort_bags_model',
+          'xgb_noCovs',
+          'xgb_onlyCovs', 
+          'xgb_subjects_sub',
+          
+          'cnn_256_bags_model',
+          'cnn_256', 
+          'cnn_196', 
+          
+          'nn_256',
+          'nn_256_wpoly',
+          
+          'RNN_256_delay2000_allModels_ADAM_bags_model',
+          'RNN_256_delay4000_FBLCR_256_ADAM_lr', 
+          'RNN_256_customDelay_allModels_ADAM', 
+          'RNN_256_delay4000', 
+          'RNN_256_delay4000_allModels_ADAM', 
+          'RNN_256_delay4000_allModelsWPoly_ADAM', 
+          'RNN_256_delay4000_FBLCRAll_ADAM',
+          'RNN_256_delay4000_FBLCR_256_oldCovsAll', 
+          'RNN_256_customDelay_allModels_ADAM_bags_model', 
+          'RNN_256PR_delay4000_allModels_ADAM',
+          'RNN_256PR_delay4000_allModels_ADAM_bags_model', 
+          'RNN_256_delay4000_allModels_ADAM_2layers',
+]

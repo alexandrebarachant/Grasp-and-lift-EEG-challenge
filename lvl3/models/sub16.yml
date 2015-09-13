@@ -1,0 +1,31 @@
+
+fileName: 'sub16'
+subsample: 100
+seed: 45667
+mean_type: ['arithmetic','geometric','power']
+verbose: False
+
+#score on series 7: 0.97855
+#score on series 8: 0.97842
+#CV score: 0.97849 / 0.000065
+
+
+ensemble: [
+            'xgb_bags',
+            'xgb_subjects_sub',   
+            'xgb_bags_model', 
+            'xgb_bags_delay', 
+            'xgb_short',
+            
+            'RNN_256_delay4000_allModels_ADAM',
+            'RNN_256_delay4000_allModels_ADAM_bags', 
+            'RNN_256_delay4000_allModels_ADAM_2layers', 
+            'RNN_256_delay4000_FBLCRAll_ADAM',
+            'RNN_256_delay4000_FBLCR_256_oldCovsAll',
+            'RNN_256_delay2000_allModels_ADAM_bags_model',
+            
+            'cnn_256', 
+            
+            'RNN_256PR_delay4000_allModels_ADAM_bags_model',
+            'RNN_256PR_delay4000_allModels_ADAM',
+            ]

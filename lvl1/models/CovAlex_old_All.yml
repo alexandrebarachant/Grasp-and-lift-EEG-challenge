@@ -1,0 +1,55 @@
+# Import python package
+imports:
+    preprocessing.aux:
+        - DelayPreds
+        - SubSample
+        - NoneTransformer
+    sklearn.linear_model:
+        - LogisticRegression
+    sklearn.preprocessing:
+        - StandardScaler
+        - Normalizer
+    sklearn.lda:
+        - LDA
+    sklearn.ensemble:
+        - RandomForestClassifier
+
+# Meta variables
+Meta:
+  file: 'CovAlex_old_All'
+  cores: 6
+  subsample: 10
+  subsample_test: 1
+  cachePreprocessed: False
+  addPreprocessed:
+      - 'CovsAlex_35Hz_250pts'
+      - 'CovsAlex_35Hz_500pts'
+      - 'CovsAlex_1-15Hz_500pts'
+      - 'CovsAlex_7-30Hz_500pts'
+      - 'CovsAlex_20-35Hz_500pts'
+      - 'CovsAlex_70-150Hz_500pts'
+      - 'CovsERP_Dist'
+      #- 'CovsRafal_35Hz_256pts'
+      #- 'CovsRafal_35Hz_500pts'
+
+# preprocessing functions receive arguments: X, y(only for train)
+Preprocessing:
+    - NoneTransformer:
+
+PostPreprocessing:
+    - SubSample:
+        subsample: 1
+    - DelayPreds:
+        delay: 1000 / subsample
+        skip: 100 / subsample
+
+Models:
+  #- '("lda",LDA())'
+  - '("lr",LogisticRegression())'
+  #- '("rf",RandomForestClassifier(200))'
+  #- '("l1",Normalizer(norm="l1")),("lr",LogisticRegression())'
+  #- '("l2",Normalizer(norm="l2")),("lr",LogisticRegression())'
+  #- '("sc",StandardScaler()),("lr",LogisticRegression())'
+  #- '("l1",Normalizer(norm="l1")),("lda",LDA())'
+  #- '("l2",Normalizer(norm="l2")),("lda",LDA())'
+  #- '("sc",StandardScaler()),("lda",LDA())'
