@@ -184,7 +184,7 @@ However, the dataset is really clean, and contains very clear and strong pattern
 
 #### Are all these models necessary ?
 
-We made heavy use of ensembling for this challenge. The way the problem was defined (prediction of every sample) was playing in favor of this kind of solution. In this context, adding more models were always increasing the performances by boosting the sharpness of the predictions.
+We made heavy use of ensembling for this challenge. The way the problem was defined (prediction of every sample) was playing in favor of this kind of solution. In this context, adding more models was always increasing the performance by boosting the sharpness of predictions.
 
 For a real-life application, it is not really necessary to classify every time sample, and use a time frame approach, e.g output prediction for every 250ms time frame. We believe it is possible to obtain equivalent decoding performances with a much more optimized solution, stopping ensembling at level2, and using only a few subsets of level1 models (1 for each kind of features).
 
@@ -423,4 +423,3 @@ Here is a short overview of the source code for each folder.
 - **lvl3**
   - *genFinal.py* : script for weighted mean ensembling of lvl2 models.
   - *genYOLO.py* : script to generate the YOLO submission.
-
