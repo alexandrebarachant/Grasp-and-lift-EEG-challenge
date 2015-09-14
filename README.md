@@ -14,9 +14,8 @@ Code and documentation for the winning solution in the Grasp-and-Lift EEG Detect
         - [Level1](#level1)
         - [Level2](#level2)
         - [Level3](#level3)    
-    - [Submissions](#submission)
+    - [Submissions](#submissions)
     - [Discussion](#discussion)
-
 - [Code](#code)
     - [Code overview](#code-overview)
     - [Generating submissions](#generating-submissions)
@@ -364,6 +363,7 @@ You can find description of preprocessing steps and settings for a model in its 
 | xgb_noCovs                                    | 0.9707 | - | - |
 | xgb_longshort                                 | 0.9747 | - | - |
 | xgb_longshort_bags_model                      | 0.9762 | - | - |
+|                                               |        |
 | RNN_256PR_delay4000_allModels_ADAM            | 0.9752 | 0.97946 | 0.97946
 | **RNN_256PR_delay4000_allModels_ADAM_bags_model** | 0.9768 | 0.97998 | 0.98013
 | RNN_256_customDelay_allModels_ADAM            | 0.9722 | - | - |
@@ -380,15 +380,17 @@ You can find description of preprocessing steps and settings for a model in its 
 | RNN_256_delay4000_FBLCR_256_oldCovsAll        | 0.9743 | - | - |
 | RNN_256_delay4000                             | 0.9506 | - | - |
 | **RNN_256_delay2000_allModels_ADAM_bags_model**   | 0.9762 | - | - |
+|                                               |        |
 | nn_256                                        | 0.9736 | - | - |
 | nn_256_wpoly                                  | 0.9734 | - | - |
 | NN_256_allModels_ADAM_bags                    | 0.9731 |  0.97680 | 0.97682
 | NN_350_allModels_ADAM                         | 0.9735 | - | - |
+|                                               |        |
 | cnn_196                                       | 0.9700 | - | - |
 | cnn_256                                       | 0.9716 | - | - |
 | cnn_256_bags_model                            | 0.9749 | 0.97813 | 0.97796
 
-Model in bold are used in the Safe1 submission
+Models in bold are used in the Safe1 submission
 
 ## Source File description
 
