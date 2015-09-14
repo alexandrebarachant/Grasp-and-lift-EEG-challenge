@@ -19,10 +19,10 @@ Code and documentation for the winning solution in the Grasp-and-Lift EEG Detect
 - [Code](#code)
     - [Code overview](#code-overview)
     - [Generating submissions](#generating-submissions)
+    - [Overview of source files](#overview-of-source-files)
 - [Appendix](#appendix)
     - [List of level1 models](#list-of-level1-models)
     - [List of level2 models](#list-of-level2-models)
-    - [Source File description](#source-file-description)
 
 **Licence** : BSD 3-clause. see Licence.txt
 
@@ -272,7 +272,41 @@ For the [Safe1](#safe1) submission, run :
 
 generated submission is saved in the `submissions` subfolder.
 
-# Appendix: performances of individual models
+## Overview of source files
+
+Complete description of classes and methods can be found in their corresponding file. Most of the classes inherit from sklearn's `ClassifierMixin` or `TransformerMixin` in order to be pipelined through sklearn's `Pipeline` framework.
+Here is a short overview of the source code for each folder.
+
+- **preprocessing**
+  - *aux.py* : contains auxiliary methods and classes, mainly to read raw files, extract sliding windows, or augment input data with a portion of timecourse history.
+  - *filterBank.py* : code for frequential filtering of the signal.
+  - *covs_alex.py* : preprocessing for covariance-based features.
+  - *erp.py* : preprocessing for ERP features.
+
+- **utils**
+  - *ensemble.py* : utility methods to read predictions generated in different levels.
+  - *nn.py* : creating a neural network architecture as specified in the YAML file.
+
+- **ensembling**
+  - *NeuralNet.py* : sklearn compatible classifier for neural network models.
+  - *WeightedMean.py* : sklearn compatible classifier for weighted mean ensembling with hyperopt parameter optimization.
+  - *XGB.py* : sklearn compatible classifier for xgboost.
+
+- **lvl1**
+  - *genPreds.py* : script for FilterBank and covariance lvl1 models.
+  - *genPreds_CNN_Tim.py* : script for CNN lvl1 models. This script is an adaptation of Tim Hochberg's CNN script.
+  - *genPreds_RNN.py* : script for RNN lvl1 model.
+
+- **lvl2**
+  - *genEns.py* : script to generate ensembling of lvl1 models.
+  - *genEns_BagsSubjects.py* : script for ensembling with bags of different subjects.
+  - *genEns_BagsModels.py* : script for ensembling with bags of different lvl1 models.
+
+- **lvl3**
+  - *genFinal.py* : script for weighted mean ensembling of lvl2 models.
+  - *genYOLO.py* : script to generate the YOLO submission.
+
+# Appendix
 
 Here we provide a list of scores achieved individually by each model. For a few of them also leaderboard scores are given.
 You can find description of preprocessing steps and settings for a model in its YAML file that is contained in *lvl[1-3]/models* folder.
@@ -391,37 +425,3 @@ You can find description of preprocessing steps and settings for a model in its 
 | cnn_256_bags_model                            | 0.9749 | 0.97813 | 0.97796
 
 Models in bold are used in the Safe1 submission
-
-## Source File description
-
-Complete description of classes and methods can be found in their corresponding file. Most of the classes inherit from sklearn's `ClassifierMixin` or `TransformerMixin` in order to be pipelined through sklearn's `Pipeline` framework.
-Here is a short overview of the source code for each folder.
-
-- **preprocessing**
-  - *aux.py* : contains auxiliary methods and classes, mainly to read raw files, extract sliding windows, or augment input data with a portion of timecourse history.
-  - *filterBank.py* : code for frequential filtering of the signal.
-  - *covs_alex.py* : preprocessing for covariance-based features.
-  - *erp.py* : preprocessing for ERP features.
-
-- **utils**
-  - *ensemble.py* : utility methods to read predictions generated in different levels.
-  - *nn.py* : creating a neural network architecture as specified in the YAML file.
-
-- **ensembling**
-  - *NeuralNet.py* : sklearn compatible classifier for neural network models.
-  - *WeightedMean.py* : sklearn compatible classifier for weighted mean ensembling with hyperopt parameter optimization.
-  - *XGB.py* : sklearn compatible classifier for xgboost.
-
-- **lvl1**
-  - *genPreds.py* : script for FilterBank and covariance lvl1 models.
-  - *genPreds_CNN_Tim.py* : script for CNN lvl1 models. This script is an adaptation of Tim Hochberg's CNN script.
-  - *genPreds_RNN.py* : script for RNN lvl1 model.
-
-- **lvl2**
-  - *genEns.py* : script to generate ensembling of lvl1 models.
-  - *genEns_BagsSubjects.py* : script for ensembling with bags of different subjects.
-  - *genEns_BagsModels.py* : script for ensembling with bags of different lvl1 models.
-
-- **lvl3**
-  - *genFinal.py* : script for weighted mean ensembling of lvl2 models.
-  - *genYOLO.py* : script to generate the YOLO submission.
