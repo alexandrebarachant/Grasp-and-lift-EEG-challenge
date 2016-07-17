@@ -65,6 +65,8 @@ In the above context, we built a 3-level classification pipeline:
 - Level2 models are global models (i.e. not subject-specific) that are trained on level1 predictions (metafeatures). Their main goal is to take into account the temporal structure and relationship between events. Also the fact that they are global significantly helps to calibrate predictions between subjects.
 - Level3 models ensemble level2 predictions via an algorithm that optimizes level2 models' weights to maximize AUC. This step improves the sharpness of predictions while reducing overfitting.
 
+![Pipeline](Pipeline.png)
+
 ### No Future data rule
 
 We took special care to ensure that causality was respected.
